@@ -10,22 +10,17 @@ composer require bybrand/oauth2-frontapp
 ```
 
 ## Usage
-This is a instruction base to get the token, and in then, to save in your database to future request.
+This is a instruction base to get the token and refresh_token, and in then, to save in your database to future request.
 
 ```
 use Bybrand\OAuth2\Client\Provider\FrontApp as ProviderFrontApp;
-use Bybrand\OAuth2\Client\OptionProvider\JsonAuthOptionProvider;
 
 $params = $_GET;
 
 $provider = new ProviderFrontApp([
-    'clientId'     => 'key-id',
-    'clientSecret' => 'secret-key',
-    'redirectUri'  => 'your-url-redirect'
+    'clientId'    => 'key-id',
+    'redirectUri' => 'your-url-redirect'
 ]);
-
-// Need to Json authentication and not the default x-www-form-urlencoded
-$provider->setOptionProvider(new JsonAuthOptionProvider)
 
 if (!isset($params['code']) or empty($params['code'])) {
     // If we don't have an authorization code then get one
@@ -52,8 +47,9 @@ if (!isset($params['code']) or empty($params['code'])) {
         // Error, make redirect or message.
     }
 
-    // Use this to interact with an API on the users behalf
+    // Use this to interact with an API on the users behalf.
     echo $token->getToken();
+    echo $token->getRefreshToken();
 }
 ```
 Please, for more information see the PHP League's general usage examples.
