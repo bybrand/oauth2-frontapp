@@ -18,6 +18,7 @@ class FrontAppTest extends TestCase
     {
         $this->provider = new FrontApp([
             'clientId'     => 'mock_client_id',
+            'clientSecret' => 'mock_secret',
             'redirectUri'  => 'mock_redirect_uri'
             // 'state' => '', // Optional.
         ]);
